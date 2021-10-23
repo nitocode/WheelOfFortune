@@ -5,39 +5,55 @@
     <p v-if="result">The result is : <span v-html="result.name"></span></p>
     <br /><br /><br /><br />
     <WheelOfFortune
+      v-if="wheelActive"
       ref="wheel"
       :items="items"
       :first-item-index="firstItemIndex"
-      :centered-indicator="true"
-      indicator-position="top"
-      :size="300"
-      :result-variation="70"
+      :centered-indicator="wheelSettings.centeredIndicator"
+      :indicator-position="wheelSettings.indicatorPosition"
+      :size="wheelSettings.size"
+      :result-variation="wheelSettings.resultVariation"
       @wheel-start="wheelStartedCallback"
       @wheel-end="wheelEndedCallback"
       :counter-clockwise="true"
       :horizontal-content="false"
     />
-    <ItemsManager
-      class="item-manager"
-      :initial-items="items"
-      :initial-first-item-index="firstItemIndex"
-      @update-items="resetWheel"
-    />
+    <div class="manager">
+      <ItemsManager
+        class="item-manager"
+        :initial-items="items"
+        :initial-first-item-index="firstItemIndex"
+        @update-items="resetWheel"
+      />
+      <WheelManager
+        :initial-settings="wheelSettings"
+        @hard-reset="onHardReset"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import WheelOfFortune from "./components/WheelOfFortune.vue";
 import ItemsManager from "./components/ItemsManager.vue";
+import WheelManager from "./components/WheelManager.vue";
 export default {
   name: "App",
   components: {
     WheelOfFortune,
     ItemsManager,
+    WheelManager,
   },
   data() {
     return {
+      wheelActive: true,
       firstItemIndex: { value: 0 },
+      wheelSettings: {
+        centeredIndicator: true,
+        indicatorPosition: "top",
+        size: 300,
+        resultVariation: 70,
+      },
       items: [
         { id: 1, name: "Banana" },
         { id: 2, name: "Apple" },
@@ -72,11 +88,17 @@ export default {
       this.items = newItemList || this.items;
       this.$refs.wheel.reset();
     },
+    onHardReset() {
+      this.wheelActive = false;
+      setTimeout(() => {
+        this.wheelActive = true;
+      }, 20);
+    },
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -85,11 +107,17 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.item-manager {
+.manager {
   margin-top: 50px;
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: top;
+  justify-content: space-around;
+  .item-manager {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 </style>
