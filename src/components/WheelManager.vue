@@ -24,6 +24,11 @@
         v-model="settings.horizontalContent"
       />
     </div>
+    <!-- DISPLAY SHADOW -->
+    <div>
+      <label for="shadow">Display Shadow</label>
+      <input id="shadow" type="checkbox" v-model="settings.displayShadow" />
+    </div>
     <!-- INDICATOR POSITION -->
     <div>
       <label for="position">Indicator position</label>
@@ -62,6 +67,37 @@
         <option value="bounce">Bounce</option>
       </select>
     </div>
+
+    <strong>Wheel base manager</strong>
+    <!-- DISPLAY BASE -->
+    <div>
+      <label for="base">Display base</label>
+      <input id="base" type="checkbox" v-model="settings.baseDisplay" />
+    </div>
+    <!-- DISPLAY BASE SHADOW -->
+    <div>
+      <label for="baseShadow">Display base shadow</label>
+      <input
+        id="baseShadow"
+        type="checkbox"
+        v-model="settings.baseDisplayShadow"
+      />
+    </div>
+    <!-- BASE BACKGROUND -->
+    <div>
+      <label for="baseBackground">Base background</label>
+      <input
+        id="baseBackground"
+        type="text"
+        v-model="settings.baseBackground"
+      />
+    </div>
+    <!-- BASE HTML CONTENT -->
+    <div>
+      <label for="baseHtmlContent">Base HTML Content</label>
+      <textarea v-model="settings.baseHtmlContent" />
+    </div>
+
     <!-- APPLY HARD RESET -->
     <div>
       <button @click="hardReset">Hard reset</button>

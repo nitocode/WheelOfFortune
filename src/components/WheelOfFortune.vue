@@ -1,5 +1,28 @@
 <template>
   <div class="wheel-container" :class="`indicator-${indicatorPosition}`">
+    <!-- BASE WHEEL -->
+    <div
+      v-if="baseDisplay"
+      class="wheel-base"
+      :class="{ 'wheel-base-shadow': baseDisplayShadow }"
+      :style="{
+        width: `${baseSize}px`,
+        height: `${baseSize}px`,
+        background: `${baseBackground}`,
+      }"
+    >
+      <slot name="baseContent"></slot>
+    </div>
+    <!-- WHEEL SHADOW -->
+    <div
+      class="wheel-shadow"
+      v-if="displayShadow"
+      :style="{
+        width: `${size}px`,
+        height: `${size}px`,
+      }"
+    ></div>
+    <!-- WHEEL -->
     <div
       @click="launchWheel()"
       class="wheel"
@@ -74,6 +97,11 @@ export default {
       required: false,
       default: 300,
     },
+    displayShadow: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     duration: {
       type: Number,
       required: false,
@@ -104,6 +132,26 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    baseDisplay: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    baseSize: {
+      type: Number,
+      required: false,
+      default: 100,
+    },
+    baseDisplayShadow: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    baseBackground: {
+      type: String,
+      required: false,
+      default: "",
     },
   },
   data() {
@@ -185,6 +233,7 @@ export default {
 <style lang="scss">
 .wheel-container {
   position: relative;
+
   transition: transform 1s ease-in-out;
   &.indicator-top {
     transform: rotate(0deg);
@@ -197,6 +246,28 @@ export default {
   }
   &.indicator-left {
     transform: rotate(270deg);
+  }
+}
+.wheel-shadow {
+  position: absolute;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 5px 5px 15px -5px #000000;
+}
+.wheel-base {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  &-shadow {
+    box-shadow: 5px 5px 15px -5px #000000;
   }
 }
 .wheel {

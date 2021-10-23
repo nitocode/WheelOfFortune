@@ -11,6 +11,7 @@
       :centered-indicator="wheelSettings.centeredIndicator"
       :indicator-position="wheelSettings.indicatorPosition"
       :size="wheelSettings.size"
+      :display-Shadow="wheelSettings.displayShadow"
       :duration="wheelSettings.duration"
       :result-variation="wheelSettings.resultVariation"
       :easing="wheelSettings.easing"
@@ -18,7 +19,17 @@
       @wheel-end="wheelEndedCallback"
       :counter-clockwise="wheelSettings.counterClockwise"
       :horizontal-content="wheelSettings.horizontalContent"
-    />
+      :base-display="wheelSettings.baseDisplay"
+      :base-display-Shadow="wheelSettings.baseDisplayShadow"
+      :base-background="wheelSettings.baseBackground"
+    >
+      <template #baseContent>
+        <div
+          v-if="wheelSettings.baseHtmlContent"
+          v-html="wheelSettings.baseHtmlContent"
+        ></div>
+      </template>
+    </WheelOfFortune>
 
     <p v-if="result">The result is : <span v-html="result.name"></span></p>
 
@@ -56,11 +67,16 @@ export default {
         centeredIndicator: true,
         indicatorPosition: "top",
         size: 300,
+        displayShadow: true,
         duration: 4,
         resultVariation: 70,
         easing: "bounce",
         counterClockwise: true,
         horizontalContent: false,
+        baseDisplay: true,
+        baseDisplayShadow: true,
+        baseBackground: "#EEAA33",
+        baseHtmlContent: '<img src="https://placekitten.com/100/100" alt="">',
       },
       items: [
         { id: 1, name: "Banana" },
