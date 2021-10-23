@@ -1,9 +1,8 @@
 <template>
   <div>
-    <button @click="launchWheel()">LAUNCH</button
-    ><button @click="resetWheel()">RESET</button><br />
-    <p v-if="result">The result is : <span v-html="result.name"></span></p>
-    <br /><br /><br /><br />
+    <button v-if="!result" @click="launchWheel()">LAUNCH</button
+    ><button v-if="result" @click="onHardReset()">RESET</button><br />
+    <br /><br />
     <WheelOfFortune
       v-if="wheelActive"
       ref="wheel"
@@ -12,12 +11,17 @@
       :centered-indicator="wheelSettings.centeredIndicator"
       :indicator-position="wheelSettings.indicatorPosition"
       :size="wheelSettings.size"
+      :duration="wheelSettings.duration"
       :result-variation="wheelSettings.resultVariation"
+      :easing="wheelSettings.easing"
       @wheel-start="wheelStartedCallback"
       @wheel-end="wheelEndedCallback"
-      :counter-clockwise="true"
-      :horizontal-content="false"
+      :counter-clockwise="wheelSettings.counterClockwise"
+      :horizontal-content="wheelSettings.horizontalContent"
     />
+
+    <p v-if="result">The result is : <span v-html="result.name"></span></p>
+
     <div class="manager">
       <ItemsManager
         class="item-manager"
@@ -52,7 +56,11 @@ export default {
         centeredIndicator: true,
         indicatorPosition: "top",
         size: 300,
+        duration: 4,
         resultVariation: 70,
+        easing: "bounce",
+        counterClockwise: true,
+        horizontalContent: false,
       },
       items: [
         { id: 1, name: "Banana" },
@@ -90,6 +98,7 @@ export default {
     },
     onHardReset() {
       this.wheelActive = false;
+      this.result = null;
       setTimeout(() => {
         this.wheelActive = true;
       }, 20);

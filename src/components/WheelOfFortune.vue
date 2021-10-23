@@ -1,9 +1,14 @@
 <template>
-  <div class="wheel-container" :class="'indicator-' + indicatorPosition">
+  <div class="wheel-container" :class="`indicator-${indicatorPosition}`">
     <div
       @click="launchWheel()"
       class="wheel"
-      :style="{ width: `${size}px`, height: `${size}px` }"
+      :class="`easing-${easing}`"
+      :style="{
+        width: `${size}px`,
+        height: `${size}px`,
+        transitionDuration: `${duration}s`,
+      }"
     >
       <div
         v-for="(item, index) in items"
@@ -69,12 +74,25 @@ export default {
       required: false,
       default: 300,
     },
+    duration: {
+      type: Number,
+      required: false,
+      default: 4,
+    },
     resultVariation: {
       type: Number,
       required: false,
       default: 0,
       validator(value) {
         return value >= 0 && value <= 100;
+      },
+    },
+    easing: {
+      type: String,
+      required: false,
+      default: "ease",
+      validator(value) {
+        return ["ease", "bounce"].includes(value);
       },
     },
     counterClockwise: {
@@ -167,6 +185,7 @@ export default {
 <style lang="scss">
 .wheel-container {
   position: relative;
+  transition: transform 1s ease-in-out;
   &.indicator-top {
     transform: rotate(0deg);
   }
@@ -185,7 +204,14 @@ export default {
   border-radius: 50%;
   margin: auto;
   overflow: hidden;
-  transition: transform 4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &.easing-ease {
+    transition: transform ease-in-out;
+  }
+  &.easing-bounce {
+    transition: transform cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
 
   &-item {
     overflow: hidden;
