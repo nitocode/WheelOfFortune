@@ -13,6 +13,7 @@
       :size="wheelSettings.size"
       :display-Shadow="wheelSettings.displayShadow"
       :display-border="wheelSettings.displayBorder"
+      :display-indicator="wheelSettings.displayIndicator"
       :duration="wheelSettings.duration"
       :result-variation="wheelSettings.resultVariation"
       :easing="wheelSettings.easing"
@@ -75,6 +76,7 @@ export default {
         counterClockwise: true,
         horizontalContent: false,
         displayBorder: true,
+        displayIndicator: true,
         baseDisplay: true,
         baseDisplayShadow: true,
         baseBackground: "#EEAA33",

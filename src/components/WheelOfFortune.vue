@@ -1,5 +1,12 @@
 <template>
-  <div class="wheel-container" :class="`indicator-${indicatorPosition}`">
+  <div
+    class="wheel-container"
+    :class="[
+      `indicator-${indicatorPosition}`,
+      { 'wheel-container-indicator': displayIndicator },
+      { 'wheel-container-shadow': displayShadow },
+    ]"
+  >
     <!-- BASE WHEEL -->
     <div
       v-if="baseDisplay"
@@ -13,15 +20,6 @@
     >
       <slot name="baseContent"></slot>
     </div>
-    <!-- WHEEL SHADOW -->
-    <div
-      class="wheel-shadow"
-      v-if="displayShadow"
-      :style="{
-        width: `${size}px`,
-        height: `${size}px`,
-      }"
-    ></div>
     <!-- WHEEL -->
     <div
       @click="launchWheel()"
@@ -136,6 +134,11 @@ export default {
     displayBorder: {
       type: Boolean,
       required: false,
+      default: false,
+    },
+    displayIndicator: {
+      type: Boolean,
+      required: false,
       default: true,
     },
     baseDisplay: {
@@ -238,8 +241,23 @@ export default {
 <style lang="scss">
 .wheel-container {
   position: relative;
-
+  display: inline-block;
   transition: transform 1s ease-in-out;
+  overflow: hidden;
+  border-radius: 50%;
+
+  &-indicator:before {
+    content: "";
+    position: absolute;
+    z-index: 4;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid black;
+    transform: translateX(-50%);
+  }
+
   &.indicator-top {
     transform: rotate(0deg);
   }
@@ -261,13 +279,10 @@ export default {
       transform: translate(-50%, -50%) rotate(-270deg);
     }
   }
-}
-.wheel-shadow {
-  position: absolute;
-  border-radius: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: 5px 5px 15px -5px #000000;
+
+  &-shadow {
+    box-shadow: 5px 5px 15px -5px #000000;
+  }
 }
 .wheel-base {
   position: absolute;

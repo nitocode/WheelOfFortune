@@ -34,6 +34,15 @@
       <label for="border">Display Border</label>
       <input id="border" type="checkbox" v-model="settings.displayBorder" />
     </div>
+    <!-- DISPLAY INDICATOR -->
+    <div>
+      <label for="indicator">Display Indicator</label>
+      <input
+        id="indicator"
+        type="checkbox"
+        v-model="settings.displayIndicator"
+      />
+    </div>
     <!-- INDICATOR POSITION -->
     <div>
       <label for="position">Indicator position</label>
