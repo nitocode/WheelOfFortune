@@ -26,7 +26,7 @@
     <div
       @click="launchWheel()"
       class="wheel"
-      :class="`easing-${easing}`"
+      :class="[`easing-${easing}`, { 'wheel-border': displayBorder }]"
       :style="{
         width: `${size}px`,
         height: `${size}px`,
@@ -132,6 +132,11 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    displayBorder: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
     baseDisplay: {
       type: Boolean,
@@ -240,12 +245,21 @@ export default {
   }
   &.indicator-right {
     transform: rotate(90deg);
+    .wheel-base {
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
   }
   &.indicator-bottom {
     transform: rotate(180deg);
+    .wheel-base {
+      transform: translate(-50%, -50%) rotate(-180deg);
+    }
   }
   &.indicator-left {
     transform: rotate(270deg);
+    .wheel-base {
+      transform: translate(-50%, -50%) rotate(-270deg);
+    }
   }
 }
 .wheel-shadow {
@@ -265,6 +279,7 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  transition: transform 1s ease-in-out;
   transform: translate(-50%, -50%);
   &-shadow {
     box-shadow: 5px 5px 15px -5px #000000;
@@ -282,6 +297,27 @@ export default {
   }
   &.easing-bounce {
     transition: transform cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  &-border:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    border-radius: 50%;
+    background-image: linear-gradient(
+      to left,
+      black 33%,
+      rgba(255, 255, 255, 0) 0%
+    );
+    background-position: bottom;
+    background-size: 3px 1px;
+    /* background:linear-gradient(red,purple,orange); */
+    -webkit-mask: radial-gradient(transparent 65%, #000 66%);
+    mask: radial-gradient(transparent 65%, #000 66%);
   }
 
   &-item {

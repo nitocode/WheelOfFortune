@@ -29,6 +29,11 @@
       <label for="shadow">Display Shadow</label>
       <input id="shadow" type="checkbox" v-model="settings.displayShadow" />
     </div>
+    <!-- DISPLAY BORDER -->
+    <div>
+      <label for="border">Display Border</label>
+      <input id="border" type="checkbox" v-model="settings.displayBorder" />
+    </div>
     <!-- INDICATOR POSITION -->
     <div>
       <label for="position">Indicator position</label>
