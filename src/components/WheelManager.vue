@@ -8,6 +8,7 @@
         id="centered"
         type="checkbox"
         v-model="settings.centeredIndicator"
+        @click="hardReset"
       />
     </div>
     <!-- COUNTER CLOCKWISE -->

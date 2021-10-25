@@ -6,6 +6,7 @@
     <WheelOfFortune
       v-if="wheelActive"
       ref="wheel"
+      @click="launchWheel"
       :items="items"
       :first-item-index="firstItemIndex"
       :centered-indicator="wheelSettings.centeredIndicator"
@@ -70,7 +71,7 @@ export default {
         indicatorPosition: "top",
         size: 300,
         displayShadow: true,
-        duration: 4,
+        duration: 5,
         resultVariation: 70,
         easing: "bounce",
         counterClockwise: true,
@@ -80,7 +81,7 @@ export default {
         baseDisplay: true,
         baseDisplayShadow: true,
         baseBackground: "#EEAA33",
-        baseHtmlContent: '<img src="https://placekitten.com/100/100" alt="">',
+        baseHtmlContent: "Cool<br>Wheel",
       },
       items: [
         { id: 1, name: "Banana" },
@@ -129,7 +130,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Ubuntu, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

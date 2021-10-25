@@ -22,7 +22,6 @@
     </div>
     <!-- WHEEL -->
     <div
-      @click="launchWheel()"
       class="wheel"
       :class="[`easing-${easing}`, { 'wheel-border': displayBorder }]"
       :style="{
@@ -216,7 +215,7 @@ export default {
       ).style.transform = `rotate(${this.startingAngle}deg)`;
     },
     launchWheel() {
-      if (this.processingLock) {
+      if (this.processingLock && this.itemSelected != null) {
         return;
       }
       this.processingLock = true;
@@ -245,6 +244,8 @@ export default {
   transition: transform 1s ease-in-out;
   overflow: hidden;
   border-radius: 50%;
+  border: 8px solid black;
+  cursor: pointer;
 
   &-indicator:before {
     content: "";
@@ -290,6 +291,7 @@ export default {
   top: 50%;
   left: 50%;
   border-radius: 50%;
+  border: 5px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -305,13 +307,12 @@ export default {
   border-radius: 50%;
   margin: auto;
   overflow: hidden;
-  transition: transform cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &.easing-ease {
-    transition: transform ease-in-out;
+    transition: transform cubic-bezier(0.65, 0, 0.35, 1);
   }
   &.easing-bounce {
-    transition: transform cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform cubic-bezier(0.49, 0.02, 0.52, 1.12);
   }
 
   &-border:after {
@@ -343,6 +344,7 @@ export default {
     width: 50%;
     height: 50%;
     transform-origin: 0% 100%;
+    border: 1px solid black;
   }
   &-item:nth-child(odd) {
     background-color: skyblue;
