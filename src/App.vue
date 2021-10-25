@@ -88,12 +88,22 @@ export default {
         baseHtmlContent: "Awesome<br>Wheel",
       },
       items: [
-        { id: 1, name: "Banana" },
-        { id: 2, name: "Apple" },
-        { id: 3, name: "Orange<br>and Purple" },
-        { id: 4, name: "Cherry" },
-        { id: 5, name: "Strawberry" },
-        { id: 6, name: "Grape" },
+        { id: 1, name: "Banana", htmlContent: "Banana", background: "" },
+        { id: 2, name: "Apple", htmlContent: "Apple", background: "" },
+        {
+          id: 3,
+          name: "Orange and Purple",
+          htmlContent: "Orange<br>and Purple",
+          background: "",
+        },
+        { id: 4, name: "Cherry", htmlContent: "Cherry", background: "" },
+        {
+          id: 5,
+          name: "Strawberry",
+          htmlContent: "Strawberry",
+          background: "",
+        },
+        { id: 6, name: "Grape", htmlContent: "Grape", background: "" },
       ],
       result: null,
     };

@@ -50,9 +50,10 @@
             transform: `skewY(${90 - itemAngle}deg) rotate(${
               itemAngle / 2
             }deg)`,
+            background: item.background,
           }"
         >
-          <span v-html="item.name"></span>
+          <span v-html="item.htmlContent"></span>
         </div>
       </div>
     </div>

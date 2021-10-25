@@ -5,6 +5,8 @@
       <tr>
         <th v-if="initialFirstItemIndex != null">First Item</th>
         <th>Name</th>
+        <th>Html content</th>
+        <th>Background</th>
         <th>Delete</th>
       </tr>
       <tr v-for="(item, index) in items" :key="item.id">
@@ -17,6 +19,8 @@
           />
         </td>
         <td><input type="text" v-model="item.name" /></td>
+        <td><textarea v-model="item.htmlContent" /></td>
+        <td><input type="text" v-model="item.background" /></td>
         <td><button @click="remove(index)">X</button></td>
       </tr>
     </table>
@@ -54,7 +58,12 @@ export default {
   methods: {
     add() {
       const lastItem = this.items[this.items.length - 1];
-      this.items.push({ id: lastItem.id + 1, name: "" });
+      this.items.push({
+        id: lastItem.id + 1,
+        name: "",
+        content: "",
+        background: "",
+      });
     },
     remove(index) {
       if (this.items.length < 5) {
