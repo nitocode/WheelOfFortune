@@ -213,6 +213,10 @@ export default {
   },
   mounted() {
     this.reset();
+    document.querySelector(".wheel").addEventListener("transitionend", () => {
+      this.processingLock = false;
+      this.$emit("wheel-end", this.itemSelected);
+    });
   },
   methods: {
     reset() {
