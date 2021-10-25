@@ -345,7 +345,7 @@ export default {
 }
 
 .wheel {
-  background: green;
+  background: white;
   border-radius: 50%;
   margin: auto;
   overflow: hidden;
