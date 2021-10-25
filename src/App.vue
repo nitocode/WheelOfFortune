@@ -81,7 +81,7 @@ export default {
         baseDisplay: true,
         baseDisplayShadow: true,
         baseBackground: "#EEAA33",
-        baseHtmlContent: "Cool<br>Wheel",
+        baseHtmlContent: "Awesome<br>Wheel",
       },
       items: [
         { id: 1, name: "Banana" },
