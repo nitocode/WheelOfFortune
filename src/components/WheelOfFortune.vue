@@ -10,16 +10,18 @@
   >
     <!-- BASE WHEEL -->
     <div
-      v-if="baseDisplay"
-      class="wheel-base"
-      :class="{ 'wheel-base-shadow': baseDisplayShadow }"
+      class="wheel-base-container"
+      :class="{ 'wheel-base-container-shadow': baseDisplayShadow }"
       :style="{
         width: `${baseSize}px`,
         height: `${baseSize}px`,
         background: `${baseBackground}`,
       }"
     >
-      <slot name="baseContent"></slot>
+      <div v-if="baseDisplay" class="wheel-base">
+        <slot name="baseContent"></slot>
+      </div>
+      <div v-if="baseDisplayIndicator" class="wheel-base-indicator"></div>
     </div>
     <!-- WHEEL -->
     <div
@@ -156,6 +158,12 @@ export default {
       required: false,
       default: false,
     },
+    baseDisplayIndicator: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+
     baseBackground: {
       type: String,
       required: false,
@@ -239,10 +247,15 @@ export default {
 </script>
 
 <style lang="scss">
+.wheel-container,
+.wheel-base,
+.wheel-base-container,
+.wheel-base-indicator {
+  transition: transform 1s ease-in-out;
+}
 .wheel-container {
   position: relative;
   display: inline-block;
-  transition: transform 1s ease-in-out;
   overflow: hidden;
   border-radius: 50%;
   cursor: pointer;
@@ -265,19 +278,19 @@ export default {
   &.indicator-right {
     transform: rotate(90deg);
     .wheel-base {
-      transform: translate(-50%, -50%) rotate(-90deg);
+      transform: rotate(-90deg);
     }
   }
   &.indicator-bottom {
     transform: rotate(180deg);
     .wheel-base {
-      transform: translate(-50%, -50%) rotate(-180deg);
+      transform: rotate(-180deg);
     }
   }
   &.indicator-left {
     transform: rotate(270deg);
     .wheel-base {
-      transform: translate(-50%, -50%) rotate(-270deg);
+      transform: rotate(-270deg);
     }
   }
 
@@ -289,23 +302,50 @@ export default {
     box-shadow: 5px 5px 15px -5px #000000;
   }
 }
-.wheel-base {
+.wheel-base-container {
   position: absolute;
   z-index: 2;
   top: 50%;
   left: 50%;
   border-radius: 50%;
   border: 5px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  transition: transform 1s ease-in-out;
   transform: translate(-50%, -50%);
+
   &-shadow {
     box-shadow: 5px 5px 15px -5px #000000;
   }
+
+  .wheel-base {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .wheel-base-indicator {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+  }
+  .wheel-base-indicator:before {
+    /* &-indicator:before { */
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: -20px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid black;
+    transform: translateX(-50%);
+  }
 }
+
 .wheel {
   background: green;
   border-radius: 50%;

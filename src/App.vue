@@ -23,7 +23,9 @@
       :counter-clockwise="wheelSettings.counterClockwise"
       :horizontal-content="wheelSettings.horizontalContent"
       :base-display="wheelSettings.baseDisplay"
-      :base-display-Shadow="wheelSettings.baseDisplayShadow"
+      :base-size="wheelSettings.baseSize"
+      :base-display-indicator="wheelSettings.baseDisplayIndicator"
+      :base-display-shadow="wheelSettings.baseDisplayShadow"
       :base-background="wheelSettings.baseBackground"
     >
       <template #baseContent>
@@ -79,7 +81,9 @@ export default {
         displayBorder: true,
         displayIndicator: true,
         baseDisplay: true,
+        baseSize: 100,
         baseDisplayShadow: true,
+        baseDisplayIndicator: true,
         baseBackground: "#EEAA33",
         baseHtmlContent: "Awesome<br>Wheel",
       },

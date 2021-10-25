@@ -61,7 +61,7 @@
     <!-- SIZE -->
     <div>
       <label for="size">Size</label>
-      <input type="number" v-model="settings.size" />
+      <input id="size" type="number" v-model="settings.size" />
     </div>
     <!-- DURATION -->
     <div>
@@ -89,6 +89,12 @@
       <label for="base">Display base</label>
       <input id="base" type="checkbox" v-model="settings.baseDisplay" />
     </div>
+
+    <!-- BASE SIZE -->
+    <div>
+      <label for="baseSize">Base size</label>
+      <input id="baseSize" type="number" v-model="settings.baseSize" />
+    </div>
     <!-- DISPLAY BASE SHADOW -->
     <div>
       <label for="baseShadow">Display base shadow</label>
@@ -96,6 +102,15 @@
         id="baseShadow"
         type="checkbox"
         v-model="settings.baseDisplayShadow"
+      />
+    </div>
+    <!-- DISPLAY BASE INDICATOR -->
+    <div>
+      <label for="baseIndicator">Display base indicator</label>
+      <input
+        id="baseIndicator"
+        type="checkbox"
+        v-model="settings.baseDisplayIndicator"
       />
     </div>
     <!-- BASE BACKGROUND -->
