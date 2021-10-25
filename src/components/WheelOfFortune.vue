@@ -5,6 +5,7 @@
       `indicator-${indicatorPosition}`,
       { 'wheel-container-indicator': displayIndicator },
       { 'wheel-container-shadow': displayShadow },
+      { 'wheel-container-border': displayBorder },
     ]"
   >
     <!-- BASE WHEEL -->
@@ -244,7 +245,6 @@ export default {
   transition: transform 1s ease-in-out;
   overflow: hidden;
   border-radius: 50%;
-  border: 8px solid black;
   cursor: pointer;
 
   &-indicator:before {
@@ -279,6 +279,10 @@ export default {
     .wheel-base {
       transform: translate(-50%, -50%) rotate(-270deg);
     }
+  }
+
+  &-border {
+    border: 8px solid black;
   }
 
   &-shadow {
