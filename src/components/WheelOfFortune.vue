@@ -31,6 +31,7 @@
         width: `${size}px`,
         height: `${size}px`,
         transitionDuration: `${duration}s`,
+        transform: `rotate(${this.startingAngle}deg)`,
       }"
     >
       <div
@@ -212,10 +213,6 @@ export default {
   },
   mounted() {
     this.reset();
-    document.querySelector(".wheel").addEventListener("transitionend", () => {
-      this.processingLock = false;
-      this.$emit("wheel-end", this.itemSelected);
-    });
   },
   methods: {
     reset() {
@@ -401,8 +398,8 @@ export default {
   .content {
     position: absolute;
     left: -100%;
-    width: 200%;
-    height: 200%;
+    width: 195%;
+    height: 195%;
     text-align: center;
     transform: skewY(30deg) rotate(0deg);
     padding-top: 20px;

@@ -8,7 +8,6 @@
         id="centered"
         type="checkbox"
         v-model="settings.centeredIndicator"
-        @click="hardReset"
       />
     </div>
     <!-- COUNTER CLOCKWISE -->
@@ -127,18 +126,12 @@
       <label for="baseHtmlContent">Base HTML Content</label>
       <textarea v-model="settings.baseHtmlContent" />
     </div>
-
-    <!-- APPLY HARD RESET -->
-    <div>
-      <button @click="hardReset">Hard reset</button>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "WheelManager",
-  emits: ["hardReset"],
   props: {
     initialSettings: {
       type: Object,
@@ -152,11 +145,6 @@ export default {
   },
   mounted() {
     this.settings = this.initialSettings;
-  },
-  methods: {
-    hardReset() {
-      this.$emit("hard-reset");
-    },
   },
 };
 </script>
