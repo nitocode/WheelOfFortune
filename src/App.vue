@@ -1,7 +1,8 @@
 <template>
   <div>
     <button v-if="!result" @click="launchWheel()">LAUNCH</button
-    ><button v-if="result" @click="onHardReset()">RESET</button><br />
+    ><button v-if="result" @click="onHardReset()">HARD RESET</button
+    ><button v-if="result" @click="onSoftReset()">SOFT RESET</button><br />
     <br /><br />
     <WheelOfFortune
       v-if="wheelActive"
@@ -43,7 +44,7 @@
         class="item-manager"
         :initial-items="items"
         :initial-first-item-index="firstItemIndex"
-        @update-items="resetWheel"
+        @update-items="onSoftReset"
       />
       <WheelManager
         :initial-settings="wheelSettings"
@@ -127,7 +128,7 @@ export default {
     launchWheel() {
       this.$refs.wheel.launchWheel();
     },
-    resetWheel(newItemList) {
+    onSoftReset(newItemList) {
       this.items = newItemList || this.items;
       this.$refs.wheel.reset();
     },
