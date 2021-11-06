@@ -10,15 +10,16 @@
   >
     <!-- BASE WHEEL -->
     <div
+      v-if="baseDisplay"
       class="wheel-base-container"
-      :class="{ 'wheel-base-container-shadow': baseDisplayShadow }"
+      :class="[{ 'wheel-base-container-shadow': baseDisplayShadow }]"
       :style="{
         width: `${baseSize}px`,
         height: `${baseSize}px`,
         background: `${baseBackground}`,
       }"
     >
-      <div v-if="baseDisplay" class="wheel-base">
+      <div class="wheel-base">
         <slot name="baseContent"></slot>
       </div>
       <div v-if="baseDisplayIndicator" class="wheel-base-indicator"></div>
